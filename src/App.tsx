@@ -1,10 +1,15 @@
-import './App.css';
-
 import { Component } from 'react';
+
+import { Layout } from './layouts/layout';
+import { MainPage } from './pages/main';
 
 class App extends Component {
   render() {
-    return <></>;
+    return (
+      <Layout>
+        <MainPage />
+      </Layout>
+    );
   }
 }
 export default App;
