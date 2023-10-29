@@ -1,0 +1,20 @@
+.results__wrapper {
+  padding: 3rem 0;
+  border-top: 0.5rem solid rgb(82, 82, 82);
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.movie {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.movie__image {
+  width: 300px;
+  height: auto;
+}

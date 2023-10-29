@@ -1,0 +1,18 @@
+.layout {
+  margin: 0 auto;
+  display: flex;
+  min-height: 100vh;
+}
+
+.layout__wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  background: rgb(0, 0, 0);
+}
+
+.main {
+  flex-grow: 1;
+  position: relative;
+}
