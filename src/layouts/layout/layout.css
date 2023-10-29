@@ -9,10 +9,10 @@
   flex-direction: column;
   flex-grow: 1;
   position: relative;
+  background: rgb(0, 0, 0);
 }
 
 .main {
   flex-grow: 1;
   position: relative;
-  background: rgb(0, 0, 0);
 }

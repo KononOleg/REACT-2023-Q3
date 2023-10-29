@@ -15,16 +15,3 @@
   font-size: 1.5rem;
   color: rgb(255, 255, 255);
 }
-
-.search__button {
-  background: rgb(227, 8, 19);
-  color: rgb(255, 255, 255);
-  padding: 1.2rem 2rem;
-  font-size: 1.5rem;
-  transition: 0.3s;
-  border-radius: 0.3rem;
-}
-
-.search__button:hover {
-  background: rgb(158, 9, 9);
-}

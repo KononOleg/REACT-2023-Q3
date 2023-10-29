@@ -8,12 +8,28 @@ type MyProps = {
   handleSearch: () => void;
 };
 
-export class Search extends Component<MyProps> {
+type MyState = {
+  hasError: boolean;
+};
+
+export class Search extends Component<MyProps, MyState> {
   constructor(props: MyProps) {
     super(props);
+
+    this.state = {
+      hasError: false,
+    };
+    this.handleError = this.handleError.bind(this);
+  }
+
+  handleError() {
+    this.setState({ hasError: true });
   }
 
   render() {
+    if (this.state.hasError) {
+      throw new Error('Error in event handler');
+    }
     return (
       <div className="search__wrapper">
         <input
@@ -23,8 +39,11 @@ export class Search extends Component<MyProps> {
           value={this.props.searchValue}
           onChange={this.props.handleChange}
         />
-        <button className="search__button" onClick={this.props.handleSearch}>
+        <button className="button" onClick={this.props.handleSearch}>
           Search movie
+        </button>
+        <button className="button" onClick={this.handleError}>
+          Throw error
         </button>
       </div>
     );
