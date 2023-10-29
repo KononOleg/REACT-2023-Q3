@@ -19,7 +19,7 @@ export class Results extends Component<MyProps> {
             {image ? (
               <img className="movie__image" src={image} alt="movie" />
             ) : (
-              <img className={ImageNotFound} src={image} alt="movie" />
+              <img className="movie__image" src={ImageNotFound} alt="movie" />
             )}
             <p>{title}</p>
           </div>

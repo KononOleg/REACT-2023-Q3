@@ -9,8 +9,8 @@ import { Search } from './components/search';
 
 type MyState = { results: Movie[]; searchValue: string };
 
-export class MainPage extends Component<null, MyState> {
-  constructor(props: null) {
+export class MainPage extends Component<object, MyState> {
+  constructor(props: object) {
     super(props);
     this.state = {
       results: [],
