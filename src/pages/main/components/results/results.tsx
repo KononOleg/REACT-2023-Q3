@@ -2,6 +2,7 @@ import './results.css';
 
 import { Component } from 'react';
 
+import ImageNotFound from '../../../../assets/image-not-found.png';
 import { Movie } from '../../../../types';
 
 type MyProps = { results: Movie[] };
@@ -15,7 +16,11 @@ export class Results extends Component<MyProps> {
       <div className="results__wrapper">
         {this.props.results.map(({ id, title, image }) => (
           <div key={id} className="movie">
-            <img src={image} alt="movie" />
+            {image ? (
+              <img className="movie__image" src={image} alt="movie" />
+            ) : (
+              <img className={ImageNotFound} src={image} alt="movie" />
+            )}
             <p>{title}</p>
           </div>
         ))}
