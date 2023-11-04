@@ -6,10 +6,10 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  color: rgb(255, 255, 255);
 }
 
 .movie {
-  color: rgb(255, 255, 255);
   text-align: center;
   font-size: 1.2rem;
 }
@@ -17,4 +17,8 @@
 .movie__image {
   width: 300px;
   height: auto;
+}
+
+.results__empty {
+  font-size: 4rem;
 }

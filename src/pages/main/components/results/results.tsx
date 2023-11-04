@@ -14,16 +14,20 @@ export class Results extends Component<MyProps> {
   render() {
     return (
       <div className="results__wrapper">
-        {this.props.results.map(({ id, title, image }) => (
-          <div key={id} className="movie">
-            {image ? (
-              <img className="movie__image" src={image} alt="movie" />
-            ) : (
-              <img className="movie__image" src={ImageNotFound} alt="movie" />
-            )}
-            <p>{title}</p>
-          </div>
-        ))}
+        {this.props.results && this.props.results.length ? (
+          this.props.results.map(({ id, title, image }) => (
+            <div key={id} className="movie">
+              {image ? (
+                <img className="movie__image" src={image} alt="movie" />
+              ) : (
+                <img className="movie__image" src={ImageNotFound} alt="movie" />
+              )}
+              <p>{title}</p>
+            </div>
+          ))
+        ) : (
+          <p className="results__empty">No results found</p>
+        )}
       </div>
     );
   }
