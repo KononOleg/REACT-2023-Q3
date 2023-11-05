@@ -35,7 +35,7 @@ export const Results: FC<MyProps> = ({
           <p>Page size:</p>
           <select
             className="results__select"
-            defaultValue={'12'}
+            defaultValue={pageSize}
             onChange={changeValue}
           >
             <option value="4">4</option>

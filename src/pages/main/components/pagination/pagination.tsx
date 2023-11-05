@@ -23,13 +23,21 @@ export const Pagination: FC<MyProps> = ({
   return (
     <div className="pagination">
       <Link to={`/?page=${currentPage - 1}`}>
-        <button className="pagination__button" onClick={handlePrevClick}>
+        <button
+          className="pagination__button"
+          onClick={handlePrevClick}
+          disabled={currentPage === 1}
+        >
           &lt;
         </button>
       </Link>
       <p>{currentPage}</p>
       <Link to={`/?page=${currentPage + 1}`}>
-        <button className="pagination__button" onClick={handleNextClick}>
+        <button
+          className="pagination__button"
+          onClick={handleNextClick}
+          disabled={currentPage >= totalPages}
+        >
           &gt;
         </button>
       </Link>

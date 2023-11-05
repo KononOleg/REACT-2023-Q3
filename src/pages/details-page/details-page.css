@@ -4,13 +4,20 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.13);
-  z-index: 4;
+
+  z-index: 3;
   display: flex;
   justify-content: end;
 }
 
+.details-page__modal {
+  width: 50vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.13);
+}
+
 .details-page__wrapper {
+  z-index: 4;
   background: rgb(0, 0, 0);
   width: 50vw;
   height: 100vh;

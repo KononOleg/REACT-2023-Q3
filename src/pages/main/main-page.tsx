@@ -1,6 +1,6 @@
 import './main-page.css';
 
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { Loading } from '../../components/error-boundary/loading';
@@ -16,7 +16,7 @@ export const MainPage: FC = () => {
     localStorage.getItem('searchValue') || ''
   );
   const [count, setCount] = useState<number>(0);
-  const [pageSize, setPageSize] = useState<number>(12);
+  const [pageSize, setPageSize] = useState<number>(8);
   const urlParams = new URLSearchParams(useLocation().search);
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const pageParam = Number(urlParams.get('page'));
@@ -31,7 +31,7 @@ export const MainPage: FC = () => {
 
   const handleSearch = () => updateMovies();
 
-  const updateMovies = useCallback(async () => {
+  const updateMovies = async () => {
     setIsLoading(true);
     const { results, count } = searchValue
       ? await searchPokemon(searchValue)
@@ -39,11 +39,11 @@ export const MainPage: FC = () => {
     setCount(count);
     setResults(results);
     setIsLoading(false);
-  }, [currentPage, pageSize, searchValue]);
+  };
 
   useEffect(() => {
     updateMovies();
-  }, [pageSize, currentPage, updateMovies]);
+  }, [pageSize, currentPage]);
 
   return (
     <>
