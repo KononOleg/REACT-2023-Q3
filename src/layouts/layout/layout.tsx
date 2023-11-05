@@ -1,19 +1,18 @@
 import './layout.css';
 
 import { FC } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { ErrorBoundary } from '../../components/error-boundary';
 
-type MyProps = {
-  children: React.ReactNode;
-};
-
-export const Layout: FC<MyProps> = ({ children }) => {
+export const Layout: FC = () => {
   return (
     <div className="layout">
       <div className="layout__wrapper">
         <ErrorBoundary>
-          <main className="main">{children}</main>
+          <main className="main">
+            <Outlet />
+          </main>
         </ErrorBoundary>
       </div>
     </div>

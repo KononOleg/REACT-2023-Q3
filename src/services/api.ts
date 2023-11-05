@@ -2,9 +2,11 @@ import { Result } from '../types';
 
 const url = `https://pokeapi.co/api/v2/`;
 
-export const getPokemons = async () => {
+export const getPokemons = async (pageSize: number, currentPage: number) => {
   try {
-    const response = await fetch(`${url}pokemon?limit=12&offset=0`);
+    const response = await fetch(
+      `${url}pokemon?limit=${pageSize}&offset=${currentPage - 1}`
+    );
     const results = await response.json();
     return {
       count: results.count,

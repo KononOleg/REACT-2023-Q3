@@ -1,12 +1,20 @@
 .results__wrapper {
-  padding: 3rem 0;
+  color: rgb(255, 255, 255);
+  padding: 0 3rem 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-top: 0.5rem solid rgb(82, 82, 82);
+}
+.results {
+  padding: 0 1rem 0;
   display: grid;
   grid-template-columns: auto auto auto auto;
   align-items: center;
   justify-content: center;
   gap: 0.4rem 1rem;
-  color: rgb(255, 255, 255);
 }
 
 .pokemon {
@@ -21,4 +29,29 @@
 
 .results__empty {
   font-size: 4rem;
+}
+
+.results__parametres {
+  display: flex;
+  font-size: 2rem;
+  gap: 2rem;
+}
+
+.results__size {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.results__select {
+  background: transparent;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.results__select option {
+  background: black;
 }
