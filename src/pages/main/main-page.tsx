@@ -1,59 +1,50 @@
 import './main-page.css';
 
-import { Component } from 'react';
+import { FC, useState } from 'react';
 
-import { getMovies } from '../../services/api';
-import { Movie } from '../../types';
+import { Loading } from '../../components/error-boundary/loading';
+import { getPokemons, searchPokemon } from '../../services/api';
+import { Pokemon } from '../../types';
 import { Results } from './components/results';
 import { Search } from './components/search';
-import { Loading } from '../../components/error-boundary/loading';
 
-type MyState = { results: Movie[]; searchValue: string; isLoading: boolean };
+type MyState = { results: Pokemon[]; searchValue: string; isLoading: boolean };
 
-export class MainPage extends Component<object, MyState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      results: [],
-      isLoading: false,
-      searchValue: localStorage.getItem('searchValue') || '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
+export const MainPage: FC<MyState> = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [results, setResults] = useState<Pokemon[]>([]);
+  const [searchValue, setSearchValue] = useState<string>(
+    localStorage.getItem('searchValue') || ''
+  );
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ searchValue: event.target.value });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
     localStorage.setItem('searchValue', event.target.value);
-  }
+  };
 
-  handleSearch() {
-    this.updateMovies();
-  }
+  const handleSearch = () => updateMovies();
 
-  componentDidMount() {
-    this.updateMovies();
-  }
+  const updateMovies = async () => {
+    setIsLoading(true);
+    const { results } = searchValue
+      ? await searchPokemon(searchValue)
+      : await getPokemons();
 
-  async updateMovies() {
-    this.setState({ isLoading: true });
-    const results = await getMovies(this.state.searchValue);
-    this.setState({ results, isLoading: false });
-  }
+    setResults(results);
+    setIsLoading(false);
+  };
 
-  render() {
-    return (
-      <>
-        {this.state.isLoading && <Loading />}
-        <div className="main-page">
-          <Search
-            searchValue={this.state.searchValue}
-            handleChange={this.handleChange}
-            handleSearch={this.handleSearch}
-          />
-          <Results results={this.state.results} />
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {isLoading && <Loading />}
+      <div className="main-page">
+        <Search
+          searchValue={searchValue}
+          handleChange={handleChange}
+          handleSearch={handleSearch}
+        />
+        <Results results={results} />
+      </div>
+    </>
+  );
+};

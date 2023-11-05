@@ -5,17 +5,17 @@
   grid-template-columns: auto auto auto auto;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.4rem 1rem;
   color: rgb(255, 255, 255);
 }
 
-.movie {
+.pokemon {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
-.movie__image {
-  width: 300px;
+.pokemon__image {
+  width: 200px;
   height: auto;
 }
 

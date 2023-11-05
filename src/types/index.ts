@@ -1,19 +1,10 @@
-export type Movie = {
+export type Pokemon = {
   id: string;
-  title: string;
+  name: string;
   image: string;
 };
 
 export type Result = {
-  jawSummary: JawSummary;
-};
-
-type JawSummary = {
-  id: string;
-  title: string;
-  backgroundImage: BackgroundImage;
-};
-
-type BackgroundImage = {
+  name: string;
   url: string;
 };

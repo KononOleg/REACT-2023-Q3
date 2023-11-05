@@ -1,27 +1,52 @@
 import { Result } from '../types';
 
-const url = (q: string) =>
-  `https://netflix-data.p.rapidapi.com/search/?query=${q}&offset=0&limit_titles=12&limit_suggestions=20`;
+const url = `https://pokeapi.co/api/v2/`;
 
-export const getMovies = async (q: string) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '6634d5d381msha119dc8f7f27896p1295e3jsn0218397c7e74',
-      'X-RapidAPI-Host': 'netflix-data.p.rapidapi.com',
-    },
-  };
-
+export const getPokemons = async () => {
   try {
-    const response = await fetch(url(q.trim()), options);
+    const response = await fetch(`${url}pokemon?limit=12&offset=0`);
     const results = await response.json();
+    return {
+      count: results.count,
+      results: results.results.map(({ name, url }: Result) => {
+        const splitArray = url.split('/');
+        const id = splitArray[splitArray.length - 2];
 
-    return results.titles.map(({ jawSummary }: Result) => ({
-      id: jawSummary.id,
-      title: jawSummary.title,
-      image: jawSummary.backgroundImage.url,
-    }));
+        return {
+          id,
+          name: name,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+        };
+      }),
+    };
   } catch {
-    return [];
+    return {
+      count: 0,
+      results: [],
+    };
+  }
+};
+
+export const searchPokemon = async (q: string) => {
+  try {
+    const response = await fetch(`${url}pokemon-species/${q}`);
+    const result = await response.json();
+
+    const { id, name } = result;
+    return {
+      count: 1,
+      results: [
+        {
+          id,
+          name,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+        },
+      ],
+    };
+  } catch {
+    return {
+      count: 0,
+      results: [],
+    };
   }
 };

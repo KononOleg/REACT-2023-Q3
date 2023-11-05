@@ -1,34 +1,29 @@
 import './results.css';
 
-import { Component } from 'react';
+import { FC } from 'react';
 
 import ImageNotFound from '../../../../assets/image-not-found.png';
-import { Movie } from '../../../../types';
+import { Pokemon } from '../../../../types';
 
-type MyProps = { results: Movie[] };
+type MyProps = { results: Pokemon[] };
 
-export class Results extends Component<MyProps> {
-  constructor(props: MyProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className="results__wrapper">
-        {this.props.results && this.props.results.length ? (
-          this.props.results.map(({ id, title, image }) => (
-            <div key={id} className="movie">
-              {image ? (
-                <img className="movie__image" src={image} alt="movie" />
-              ) : (
-                <img className="movie__image" src={ImageNotFound} alt="movie" />
-              )}
-              <p>{title}</p>
-            </div>
-          ))
-        ) : (
-          <p className="results__empty">No results found</p>
-        )}
-      </div>
-    );
-  }
-}
+export const Results: FC<MyProps> = ({ results }) => {
+  return (
+    <div className="results__wrapper">
+      {results && results.length ? (
+        results.map(({ id, name, image }) => (
+          <div key={id} className="pokemon">
+            {image ? (
+              <img className="pokemon__image" src={image} alt="image" />
+            ) : (
+              <img className="pokemon__image" src={ImageNotFound} alt="image" />
+            )}
+            <p>{name}</p>
+          </div>
+        ))
+      ) : (
+        <p className="results__empty">No results found</p>
+      )}
+    </div>
+  );
+};
