@@ -1,7 +1,7 @@
 import './main-page.css';
 
-import { FC, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { Loading } from '../../components/error-boundary/loading';
 import { getPokemons, searchPokemon } from '../../services/api';
@@ -31,7 +31,7 @@ export const MainPage: FC = () => {
 
   const handleSearch = () => updateMovies();
 
-  const updateMovies = async () => {
+  const updateMovies = useCallback(async () => {
     setIsLoading(true);
     const { results, count } = searchValue
       ? await searchPokemon(searchValue)
@@ -39,7 +39,11 @@ export const MainPage: FC = () => {
     setCount(count);
     setResults(results);
     setIsLoading(false);
-  };
+  }, [currentPage, pageSize, searchValue]);
+
+  useEffect(() => {
+    updateMovies();
+  }, [pageSize, currentPage, updateMovies]);
 
   return (
     <>
@@ -58,6 +62,7 @@ export const MainPage: FC = () => {
           setCurrentPage={setCurrentPage}
           pageSize={pageSize}
         />
+        <Outlet />
       </div>
     </>
   );

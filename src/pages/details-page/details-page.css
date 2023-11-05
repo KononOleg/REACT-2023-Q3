@@ -1,0 +1,45 @@
+.details-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.13);
+  z-index: 4;
+  display: flex;
+  justify-content: end;
+}
+
+.details-page__wrapper {
+  background: rgb(0, 0, 0);
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  padding: 3rem;
+  font-size: 1.5rem;
+}
+
+.details-page__close {
+  position: absolute;
+  right: 3rem;
+  z-index: 4;
+  background: transparent;
+  font-size: 6rem;
+  line-height: 2rem;
+  color: rgb(255, 255, 255);
+  margin: 0;
+  transition: 0.3s;
+}
+.details-page__close:hover {
+  color: rgb(176, 176, 176);
+}
+.details__title {
+  font-size: 4rem;
+}
+
+.details-card__stats {
+  margin-right: 10rem;
+}

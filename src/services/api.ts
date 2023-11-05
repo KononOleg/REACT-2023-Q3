@@ -52,3 +52,26 @@ export const searchPokemon = async (q: string) => {
     };
   }
 };
+
+export const getPokemon = async (id: string) => {
+  try {
+    const response = await fetch(`${url}pokemon/${id}`);
+    const { height, name, weight, stats } = await response.json();
+    return {
+      height,
+      name,
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+      weight,
+      stats: [
+        stats[0].base_stat,
+        stats[1].base_stat,
+        stats[2].base_stat,
+        stats[3].base_stat,
+        stats[4].base_stat,
+        stats[5].base_stat,
+      ],
+    };
+  } catch {
+    return;
+  }
+};

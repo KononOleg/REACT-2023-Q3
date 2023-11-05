@@ -20,6 +20,8 @@
 .pokemon {
   text-align: center;
   font-size: 1.5rem;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
 }
 
 .pokemon__image {

@@ -1,6 +1,7 @@
 import './results.css';
 
 import { Dispatch, FC, SetStateAction } from 'react';
+import { Link } from 'react-router-dom';
 
 import ImageNotFound from '../../../../assets/image-not-found.png';
 import { Pokemon } from '../../../../types';
@@ -46,7 +47,11 @@ export const Results: FC<MyProps> = ({
       <div className="results">
         {results && results.length ? (
           results.map(({ id, name, image }) => (
-            <div key={id} className="pokemon">
+            <Link
+              key={id}
+              className="pokemon"
+              to={`modal?page=${currentPage}&details=${id}`}
+            >
               {image ? (
                 <img className="pokemon__image" src={image} alt="image" />
               ) : (
@@ -57,7 +62,7 @@ export const Results: FC<MyProps> = ({
                 />
               )}
               <p>{name}</p>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="results__empty">No results found</p>
