@@ -18,11 +18,7 @@ export const MainPage: FC = () => {
   const [count, setCount] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(8);
   const urlParams = new URLSearchParams(useLocation().search);
-  const [currentPage, setCurrentPage] = useState<number>(() => {
-    const pageParam = Number(urlParams.get('page'));
-    if (pageParam) return pageParam;
-    else return 1;
-  });
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -40,6 +36,14 @@ export const MainPage: FC = () => {
     setResults(results);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    setCurrentPage(() => {
+      const pageParam = Number(urlParams.get('page'));
+      if (pageParam && pageParam > 1) return pageParam;
+      else return 1;
+    });
+  }, [urlParams]);
 
   useEffect(() => {
     updateMovies();

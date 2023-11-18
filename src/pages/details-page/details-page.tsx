@@ -41,7 +41,9 @@ export const DetailsPage: FC = () => {
       {isLoading && <Loading />}
       <div className="details-page__modal" onClick={handleClose}></div>
       <div className="details-page__wrapper">
-        <button className="details-page__close">x</button>
+        <button className="details-page__close" onClick={handleClose}>
+          x
+        </button>
         {pokemonData && (
           <>
             <h2 className="details__title">{pokemonData.name}</h2>

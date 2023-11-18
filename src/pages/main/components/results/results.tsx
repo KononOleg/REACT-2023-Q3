@@ -24,8 +24,10 @@ export const Results: FC<MyProps> = ({
   setCurrentPage,
   pageSize,
 }) => {
-  const changeValue = (event: React.FormEvent<HTMLSelectElement>) =>
+  const changeValue = (event: React.FormEvent<HTMLSelectElement>) => {
+    setCurrentPage(1);
     setPageSize(event.currentTarget.value as unknown as number);
+  };
 
   return (
     <div className="results__wrapper">
