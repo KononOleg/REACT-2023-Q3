@@ -4,38 +4,28 @@ import { FC, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { Loading } from '../../components/error-boundary/loading';
-import { getPokemons, searchPokemon } from '../../services/api';
-import { Pokemon } from '../../types';
+import { useAppSelector } from '../../hooks/redux';
+import { useGetPokemonsQuery } from '../../services/PokemonApi';
+import { appSelector } from '../../store/reducers/app-slice';
 import { Results } from './components/results';
 import { Search } from './components/search';
 
 export const MainPage: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [results, setResults] = useState<Pokemon[]>([]);
-  const [searchValue, setSearchValue] = useState<string>(
-    localStorage.getItem('searchValue') || ''
-  );
-  const [count, setCount] = useState<number>(0);
+  const { searchValue } = useAppSelector(appSelector);
+
   const [pageSize, setPageSize] = useState<number>(8);
   const urlParams = new URLSearchParams(useLocation().search);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
-    localStorage.setItem('searchValue', event.target.value);
-  };
-
-  const handleSearch = () => updateMovies();
-
-  const updateMovies = async () => {
-    setIsLoading(true);
-    const { results, count } = searchValue
-      ? await searchPokemon(searchValue)
-      : await getPokemons(pageSize, currentPage);
-    setCount(count);
-    setResults(results);
-    setIsLoading(false);
-  };
+  const {
+    data: results,
+    isFetching,
+    error,
+  } = useGetPokemonsQuery({
+    pageSize,
+    currentPage,
+    searchValue,
+  });
 
   useEffect(() => {
     setCurrentPage(() => {
@@ -45,27 +35,23 @@ export const MainPage: FC = () => {
     });
   }, [urlParams]);
 
-  useEffect(() => {
-    updateMovies();
-  }, [pageSize, currentPage]);
-
   return (
     <>
-      {isLoading && <Loading />}
+      {isFetching && <Loading />}
       <div className="main-page">
-        <Search
-          searchValue={searchValue}
-          handleChange={handleChange}
-          handleSearch={handleSearch}
-        />
-        <Results
-          results={results}
-          count={count}
-          setPageSize={setPageSize}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          pageSize={pageSize}
-        />
+        <Search searchValue={searchValue} />
+        {results?.results && (
+          <Results
+            results={results?.results}
+            count={results.count}
+            setPageSize={setPageSize}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            pageSize={pageSize}
+            error={error}
+          />
+        )}
+
         <Outlet />
       </div>
     </>

@@ -2,18 +2,25 @@ import './search.css';
 
 import { FC, useState } from 'react';
 
+import { useAppDispatch } from '../../../../hooks/redux';
+import { setSearchValue } from '../../../../store/reducers/app-slice';
+
 type MyProps = {
   searchValue: string;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSearch: () => void;
 };
 
-export const Search: FC<MyProps> = ({
-  searchValue,
-  handleChange,
-  handleSearch,
-}) => {
+export const Search: FC<MyProps> = ({ searchValue }) => {
+  const dispatch = useAppDispatch();
   const [hasError, setHasError] = useState<boolean>(false);
+  const [pokemonName, setPokemonName] = useState(searchValue);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPokemonName(event.target.value);
+  };
+
+  const handleSearch = () => {
+    dispatch(setSearchValue(pokemonName));
+  };
 
   const handleError = () => setHasError(true);
 
@@ -25,7 +32,7 @@ export const Search: FC<MyProps> = ({
         className="search__input"
         type="text"
         placeholder="Search movie"
-        value={searchValue}
+        value={pokemonName}
         onChange={handleChange}
       />
       <button className="button" onClick={handleSearch}>

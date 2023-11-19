@@ -16,3 +16,21 @@ export type PokemonDetail = {
   weight: string;
   stats: string[];
 };
+
+export type PokemonsResponse = {
+  count: number;
+  results: Result[];
+};
+
+export type PokemonResponse = {
+  id: string;
+  height: string;
+  name: string;
+  weight: string;
+  stats: Stat[];
+};
+export type Stat = {
+  base_stat: string;
+};
+
+export type ApiResponse = PokemonResponse & PokemonsResponse;

@@ -1,5 +1,7 @@
 import './results.css';
 
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +16,7 @@ type MyProps = {
   pageSize: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  error: FetchBaseQueryError | SerializedError | undefined;
 };
 
 export const Results: FC<MyProps> = ({
@@ -23,6 +26,7 @@ export const Results: FC<MyProps> = ({
   currentPage,
   setCurrentPage,
   pageSize,
+  error,
 }) => {
   const changeValue = (event: React.FormEvent<HTMLSelectElement>) => {
     setCurrentPage(1);
@@ -32,7 +36,6 @@ export const Results: FC<MyProps> = ({
   return (
     <div className="results__wrapper">
       <div className="results__parametres">
-        <p>Total: {count}</p>
         <div className="results__size">
           <p>Page size:</p>
           <select
@@ -47,7 +50,7 @@ export const Results: FC<MyProps> = ({
         </div>
       </div>
       <div className="results">
-        {results && results.length ? (
+        {!error ? (
           results.map(({ id, name, image }) => (
             <Link
               key={id}
