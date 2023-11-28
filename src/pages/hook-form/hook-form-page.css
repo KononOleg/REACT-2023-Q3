@@ -1,0 +1,105 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 2rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  font-size: 1.2rem;
+  color: rgb(255, 255, 255);  
+}
+
+.input-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.input-field {
+  position: relative;
+  display: flex;
+  gap:0.5rem;
+  flex-direction: column;
+}
+
+.input-field_left {
+  align-items: flex-start;
+}
+
+.input-field_large{
+  width: 100%;
+}
+
+
+input {
+  height: 2rem;
+  font-size: 1.2rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  background: #8c8c8c;
+  color: rgb(255, 255, 255);
+
+}
+
+.input_checkbox{
+  cursor: pointer;
+}
+
+.input_radio{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_select{
+  font-size: 1.5rem;
+}
+
+.input_radio input{
+  height: auto;
+}
+
+
+.input_submit {
+  margin-top: 1.5rem;
+  background: #e50914;
+  color: white;
+  cursor: pointer;
+}
+
+.input_submit:disabled {
+  background: #383636;
+}
+
+.error {
+  position: absolute;
+  bottom: -2.4rem;
+  left: 0;
+  color: red;
+  font-size: 1rem;
+}
+
+.input-file-btn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	background-color: #e50914;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+	box-sizing: border-box;
+	border: none;
+}
+
+
+.input-file input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}

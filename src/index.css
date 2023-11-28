@@ -1,6 +1,8 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  background: rgb(0, 0, 0);
 }
 
 button {
@@ -10,3 +12,7 @@ button {
   cursor: pointer;
 }
 
+input{
+  border: 0;
+  outline: none;
+}
