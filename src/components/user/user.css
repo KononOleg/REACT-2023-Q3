@@ -1,0 +1,11 @@
+.user{
+    color: white;
+    padding: 1rem;
+    border: 0.1rem solid #e50914;
+    border-radius: 1rem;
+}
+
+.user__image{
+    width: 15rem;
+    height: auto;
+}
